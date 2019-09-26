@@ -42,7 +42,7 @@ class Field {
       msg.remove
     }
   }
-  addErrorMsgs {
+  addErrorMsgs () {
     let fieldName = this.inputDiv.querySelector('label').innerText
     for (let msg of errorMsgs) {
       const msgNode = document.createElement('p')
@@ -75,7 +75,7 @@ class Field {
       }
     }
     if (errorMsgs.length === 0) {
-      this.markValid{}
+      this.markValid()
     }
     else {
       this.markInvalid()
@@ -108,6 +108,8 @@ class Parking {
   }
 }
 
+
+
 const presenceValidation = new Validation(value => !!value, 'must not be blank.')
 const nowOrFutureValidation = new Validation (function(dateStrtoTest) {
   // Date needed for parking form
@@ -126,13 +128,15 @@ const nowOrFutureValidation = new Validation (function(dateStrtoTest) {
 
 let nameField = new Field(document.querySelector('#name-field'), [presenceValidation])
 
+// let nameField = new Field(document.querySelector('name'), [presenceValidation])
+
 //other fields
 
 
 document.querySelector('#parking-form').addEventListener('submit', (event) =>{
   event.preventDefault()
-//   {
 
-// form.validate()}
+
+form.validate('#parking-form', 'nameField')
 
 })
